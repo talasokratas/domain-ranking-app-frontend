@@ -23,9 +23,10 @@ export default function Home() {
   const fetchDomains = async (page: number, search: string = "") => {
     setLoading(true);
     try {
-      const response = await axios.get("http://127.0.0.1:8000/api/domains", {
+      console.log(`${process.env.NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_URL}`)
+      const response = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_URL}`, {
         params: { page, search },
-        headers: { Authorization: `12345` },
+        headers: { Authorization: `${process.env.NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_KEY}`},
       });
       setDomains(response.data.data); // Assuming API response has data object
       setTotalPages(response.data.meta.last_page); // Assuming total pages in meta
