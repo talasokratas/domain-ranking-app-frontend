@@ -46,33 +46,28 @@ export default function Home() {
   };
 
   return (
-      <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
+      <div className="grid grid-rows-[20px_1fr_20px] min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)] justify-center">
         <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-          <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/next.svg"
-              alt="Next.js logo"
-              width={180}
-              height={38}
-              priority
-          />
-
-          <SearchInput
-              value={searchTerm}
-              onChange={handleSearch}
-          />
-
+            <h1 className="mb-4 text-4xl font-extrabold leading-none tracking-tight text-gray-900 md:text-5xl lg:text-6xl dark:text-white">
+              Page Rank Metrics Collector
+            </h1>
+            <SearchInput
+                value={searchTerm}
+                onChange={handleSearch}
+            />
           {loading ? (
               <p>Loading...</p>
-          ) : (
+          ) : domains.length === 0 ? (
+              <p>No data available.</p>
+            ) : (
               <>
                 <DomainTable domains={domains} />
 
-                <div className="mt-4 flex gap-4">
+                <div className="page-btns-wrapper mt-4 flex gap-4 justify-center w-full items-center">
                   <button
                       onClick={() => setCurrentPage((prev) => Math.max(prev - 1, 1))}
                       disabled={currentPage === 1}
-                      className="p-2 bg-gray-200 rounded"
+                      className="p-2 bg-gray-200 rounded min-w-32"
                   >
                     Previous
                   </button>
@@ -80,7 +75,7 @@ export default function Home() {
                   <button
                       onClick={() => setCurrentPage((prev) => Math.min(prev + 1, totalPages))}
                       disabled={currentPage === totalPages}
-                      className="p-2 bg-gray-200 rounded"
+                      className="p-2 bg-gray-200 rounded min-w-32"
                   >
                     Next
                   </button>
@@ -89,7 +84,7 @@ export default function Home() {
           )}
         </main>
         <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-          sad
+          <p>&copy; {new Date().getFullYear()} Evaldas Vaitonis</p>
         </footer>
       </div>
   );

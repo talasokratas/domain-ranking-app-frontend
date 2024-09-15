@@ -12,7 +12,7 @@ interface DomainTableProps {
 
 const DomainTable: React.FC<DomainTableProps> = ({ domains }) => {
     return (
-        <table className="table-auto border-collapse">
+        <table className="table-auto border-collapse w-full">
             <thead>
             <tr>
                 <th className="border px-4 py-2">Domain Name</th>
