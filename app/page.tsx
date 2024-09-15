@@ -23,14 +23,12 @@ export default function Home() {
   const fetchDomains = async (page: number, search: string = "") => {
     setLoading(true);
     try {
-      console.log(`${process.env.NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_URL}`)
       const response = await axios.get(`${process.env.NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_URL}`, {
         params: { page, search },
         headers: { Authorization: `${process.env.NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_KEY}`},
       });
-      setDomains(response.data.data); // Assuming API response has data object
-      setTotalPages(response.data.meta.last_page); // Assuming total pages in meta
-      console.log(response);
+      setDomains(response.data.data);
+      setTotalPages(response.data.meta.last_page);
     } catch (error) {
       console.error("Error fetching domains", error);
     }
