@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Page Rank Metrics Collector
 
-## Getting Started
+## Introduction
 
-First, run the development server:
+This application is made to show page rank metrics the are collected through the app's API. Application is made on React - Typescript framework.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Instructions
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+1. **Install required packages**
+      run, node version 18 or higher recommended
+      ```bash
+      npm install
+      ```
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+2. **Set API Key and URL obtained from backend application**
+      Create add values to  variables in your  .env, depending on your backend application settings:
+      For example create .env.local set this values
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+    - NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_URL http://127.0.0.1:8000/api/domains
+      NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_KEY=12345
 
-## Learn More
+3. **Run application**
 
-To learn more about Next.js, take a look at the following resources:
+    - Ensure the `OPEN_PAGE_RANK_API_KEY` in the `.env` file is set correctly.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+4. **Set Remote JSON File URL**
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+    - Provide the URL of the remote JSON file containing the domain list in the `.env` file under `DOMAIN_LIST_REMOTE_JSON_FILE`.
+    - If your domain file is hosted on GitHub, use the raw link format, e.g., `https://raw.githubusercontent.com/user/project/branch/filename.json`.
+    - The default key for domain names is set to "rootDomain". You can customize this key in the `DomainListFromRemoteJsonService` class.
 
-## Deploy on Vercel
+5. **Schedule Data Collection**
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+    - The application uses Laravel's scheduler to collect page data daily. Configure the interval in Laravel's schedule.
+    - Add the following command to your server’s cron job to execute it:
+      ```bash
+      cd /path-to-your-project && php artisan schedule:run >> /dev/null 2>&1
+      ```
+    - For manual data updates, use the URL `/manual-import`.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+6. **Configure API Access**
+
+    - Set the app's API key in the `.env` file under `APP_API_KEY`.
+    - External applications must include this header in their requests to access the app's API:
+      ```plaintext
+      Authorization: your-api-key
+      ```
+    - An empty string can be used if no key is set.
+
+7. **Access Domain Data**
+
+    - The list of domains with ranks is accessible via the following URL: `/api/domains`.
+

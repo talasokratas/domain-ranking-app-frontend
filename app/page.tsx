@@ -2,7 +2,6 @@
 
 import { useEffect, useState } from "react";
 import axios from "axios";
-import Image from "next/image";
 import DomainTable from '../components/DomainTable';
 import SearchInput from '../components/SearchInput';
 
