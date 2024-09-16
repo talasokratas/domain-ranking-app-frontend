@@ -20,7 +20,7 @@ Application is made on React - Typescript framework.
       For example create .env.local set this values
 
     - NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_URL http://127.0.0.1:8000/api/domains
-      NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_KEY=12345
+    - NEXT_PUBLIC_PAGE_METRICS_COLLECTOR_API_KEY=12345
 
 3. **Run application**
 
